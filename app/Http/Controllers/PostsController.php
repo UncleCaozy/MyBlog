@@ -6,8 +6,8 @@ use App\Discussion;
 use App\Http\Requests\StoreBlogPostRequest;
 use App\Markdown\Markdown;
 use Illuminate\Http\Request;
-use Auth;
-use EndaEditor;
+use Illuminate\Support\Facades\Auth;
+use YuanChao\Editor\EndaEditor;
 
 class PostsController extends Controller
 {
@@ -37,7 +37,7 @@ class PostsController extends Controller
     public function edit($id)
     {
         $discussion = Discussion::findOrFail($id);
-        if(\Auth::user()->id!==$discussion->user_id){
+        if(Auth::user()->id!==$discussion->user_id){
             return redirect('/');
         }
         return view('forum.edit',compact('discussion'));
